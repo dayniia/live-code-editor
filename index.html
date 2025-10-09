@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Editor</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container row">
+        <div class="brand">
+          <div class="logo"></div>
+          <div class="title">Code Editor - Live in the Browser</div>
+        </div>
+        <div class="row">
+          <button class="btn secondary" id="saveBtn" title="Save work locally">
+            <span>Save</span>
+          </button>
+          <button class="btn secondary" id="loadBtn" title="Load work file">
+            <span>Load</span>
+          </button>
+          <button
+            class="btn secondary"
+            id="themeToggle"
+            title="Toggle theme"
+            style="display: flex; align-items: center; gap: 6px"
+          >
+            <span
+              id="themeIcon"
+              aria-label="theme icon"
+              style="font-size: 1.3em"
+              >🌙</span
+            >
+          </button>
+          <input
+            type="file"
+            id="openFile"
+            style="display: none"
+            accept="application/json"
+          />
+        </div>
+      </div>
+    </header>
+    <main>
+      <aside class="card stack panel">
+        <h2>Task / Assignment</h2>
+        <textarea
+          class="text"
+          placeholder="Write the task description here..."
+          id="assignment"
+        ></textarea>
+        <div class="stack">
+          <label for="testArea"
+            >Validation tests (JavaScript only - optional)</label
+          >
+          <textarea
+            class="text"
+            placeholder="Write simple tests to append after the students' code to check the solution."
+            id="testArea"
+          ></textarea>
+        </div>
+        <div class="muted">
+          Tip: <span class="kbd">Ctrl</span> + <span class="kbd">S</span> to
+          save, <span class="kbd">Ctrl</span> +
+          <span class="kbd">Enter</span> to run.
+        </div>
+      </aside>
+      <section class="stack" id="web-only">
+        <div class="stack panel card" id="webEditors">
+          <div class="row">
+            <h2>HTML / CSS / JS</h2>
+            <div class="row">
+              <button class="btn ok" id="runWeb">Run</button>
+              <button class="btn secondary" id="openPreview">
+                Open Preview in a new window
+              </button>
+            </div>
+          </div>
+          <div
+            class="tabs"
+            id="webTabs"
+            role="tablist"
+            aria-label="web editors"
+          >
+            <button
+              class="tab active"
+              role="tab"
+              aria-selected="true"
+              tabindex="0"
+              data-pane="html"
+            >
+              HTML
+            </button>
+            <button
+              class="tab"
+              role="tab"
+              aria-selected="false"
+              tabindex="-1"
+              data-pane="css"
+            >
+              CSS
+            </button>
+            <button
+              class="tab"
+              role="tab"
+              aria-selected="false"
+              tabindex="-1"
+              data-pane="js"
+            >
+              JavaScript
+            </button>
+          </div>
+          <div class="editor-wrap" data-pane="html">
+            <div id="ed_html" class="editor"></div>
+          </div>
+          <div class="editor-wrap" data-pane="css" hidden>
+            <div class="editor" id="ed_css"></div>
+          </div>
+          <div class="editor-wrap" data-pane="js" hidden>
+            <div id="ed_js" class="editor"></div>
+          </div>
+          <div class="stack">
+            <h3>Preview</h3>
+            <iframe
+              id="preview"
+              class="preview"
+              sandbox="allow-scipts allow-same-origin allow-modals"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+      <aside class="stack panel card">
+        <h2>Output</h2>
+        <div class="out" id="output" aria-live="polite"></div>
+        <div class="row">
+          <button class="btn warn" id="runTests">Run with tests</button>
+          <button class="btn secondary">Clean log</button>
+        </div>
+        <h3>Notes</h3>
+        <ul class="muted">
+          <li>Everything runs inside the browser in a sandbox.</li>
+          <li>You can save the work as a JSON file and restore it...</li>
+        </ul>
+      </aside>
+    </main>
+    <div class="footer">&copy; 2025 Programming- All rights reserved.</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.43.2/ace.js"></script>
+    <script src="script.js"></script>
+    <script>
+      // Theme toggle - delegate to applyTheme from script.js and update icon
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
+      let darkMode = true;
+      function updateIcon() {
+        themeIcon.textContent = darkMode ? "🌙" : "☀️";
+      }
+      themeToggle.addEventListener("click", () => {
+        darkMode = !darkMode;
+        // applyTheme is defined in script.js
+        if (typeof applyTheme === "function") applyTheme(darkMode);
+        updateIcon();
+      });
+      // initial apply
+      if (typeof applyTheme === "function") applyTheme(true);
+      updateIcon();
+    </script>
+  </body>
+</html>
