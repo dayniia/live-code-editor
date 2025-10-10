@@ -46,18 +46,13 @@ Then open http://localhost:8000 in your browser.
 - Ctrl/Cmd + Enter — Run preview
 - Ctrl/Cmd + S — Save project and download JSON
 
+## Live Demo
+<a href="https://dayniia.github.io/live-code-editor/ " target="_blank">try live code editor</a>
+
 ## Development notes
 
 - Editor panes are powered by Ace Editor. Themes are switched programmatically when toggling light/dark.
 - The preview runs inside a sandboxed iframe to reduce risk. If you need full access for advanced demos, adjust `sandbox` attributes carefully.
 - The app autosaves to localStorage (if enabled) and can restore on load.
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feat/your-feature`
-3. Commit your changes: `git commit -m "feat: description"`
-4. Push and open a pull request
-
-Please include a short description and screenshots (if UI changes).
 
