@@ -60,6 +60,10 @@ function makeEditor(id,mode){
         // adjust editor container backgrounds to surface var (some browsers pick vars automatically)
         $$(".editor-wrap").forEach(w=>{ w.style.background = getComputedStyle(document.documentElement).getPropertyValue('--surface').trim(); });
         $(".out") && ($(".out").style.background = getComputedStyle(document.documentElement).getPropertyValue('--surface').trim());
+        // persist choice
+        try{
+            localStorage.setItem('live-code-editor:dark', isDark ? '1' : '0');
+        }catch(e){/* ignore */}
     }
 
        const TAB_ORDER=["html","css","js"];
