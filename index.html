@@ -151,18 +151,25 @@
       // Theme toggle - delegate to applyTheme from script.js and update icon
       const themeToggle = document.getElementById("themeToggle");
       const themeIcon = document.getElementById("themeIcon");
+      // read persisted value if present
       let darkMode = true;
+      try {
+        const saved = localStorage.getItem("live-code-editor:dark");
+        if (saved !== null) darkMode = saved === "1";
+      } catch (e) {
+        /* ignore */
+      }
+
       function updateIcon() {
         themeIcon.textContent = darkMode ? "🌙" : "☀️";
       }
       themeToggle.addEventListener("click", () => {
         darkMode = !darkMode;
-        // applyTheme is defined in script.js
         if (typeof applyTheme === "function") applyTheme(darkMode);
         updateIcon();
       });
-      // initial apply
-      if (typeof applyTheme === "function") applyTheme(true);
+      // initial apply (use persisted or default true)
+      if (typeof applyTheme === "function") applyTheme(darkMode);
       updateIcon();
     </script>
   </body>
