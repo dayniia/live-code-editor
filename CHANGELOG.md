@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.0.1] - 2025-10-21
+
+### Added
+
+- New logo: replaced the old logo with a modern, theme-consistent code icon.
+- Theme-aware keyboard shortcut chips: “Ctrl”, “S”, and “Enter” now adapt to both light and dark modes for better readability.
+- Improved light theme support for tabs, editors, and output panels.
+
+### Changed
+
+- General UI polish: smoother gradients, better contrast, and more consistent styling across themes.
+
+### Fixed
+
+- HTML editor: re-enabled Ace linting for real-time feedback, and removed the placeholder comment to avoid DOCTYPE errors.
+
+---
+
 ## [1.0.0] - 2025-10-09
 
 ### Added
@@ -34,5 +52,3 @@
 ### Contributors
 
 - Initial author: dayniia
-
-
