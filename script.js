@@ -7,7 +7,7 @@ const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({ '&':'&amp;', '<':'&lt;', 
 
 function log(msg, type="info"){
 
-    const color=type==="error"?"#var(--err)":type==="warn"?"var(--warn)":"var(--brand)";
+    const color=type==="error"?"var(--err)":type==="warn"?"var(--warn)":"var(--brand)";
     const time=new Date().toLocaleTimeString();
     const line=document.createElement("div");
     line.innerHTML=`<span style="color: ${color}">[${time}]</span> ${escapeHtml(msg)}`;
@@ -42,7 +42,12 @@ function makeEditor(id,mode){
          return ed;
        }
 
-       const ed_html=makeEditor("ed_html","ace/mode/html");
+    const ed_html=makeEditor("ed_html","ace/mode/html");
+    // Keep the HTML worker enabled for linting
+       try{
+           ed_html.session.setUseWorker(true);
+           ed_html.session.clearAnnotations();
+       }catch{}
        const ed_css=makeEditor("ed_css","ace/mode/css");
        const ed_js=makeEditor("ed_js","ace/mode/javascript");
 
@@ -176,7 +181,8 @@ function loadProject(Obj){
     }
 }
 function setDefaultContent(){
-    ed_html.setValue(`<!-- Write your HTML here -->`, -1);
+    // Leave HTML empty so the worker won't flag missing DOCTYPE by default
+    ed_html.setValue("", -1);
     ed_css.setValue(`/* Write your CSS here */`, -1);
     ed_js.setValue(`// Write your JavaScript here`, -1);
 }
