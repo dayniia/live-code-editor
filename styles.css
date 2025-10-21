@@ -14,6 +14,11 @@
     --tab-bg: rgba(0,0,0,0.04);
     --tab-active-bg: rgba(56,189,248,0.12);
     --tab-color: #222;
+    /* Keyboard hint chips */
+    --kbd-bg: #ffffff;
+    --kbd-bg-2: #f3f4f6; /* subtle bottom tint */
+    --kbd-border: rgba(0,0,0,0.15);
+    --kbd-color: #111;
 }
 
 :root{
@@ -32,6 +37,11 @@
     --tab-bg: rgba(255,255,255,0.06);
     --tab-active-bg: rgba(125,211,252,0.12);
     --tab-color: #fff;
+    /* Keyboard hint chips */
+    --kbd-bg:#140e24;
+    --kbd-bg-2:#0f1222; /* subtle bottom tint */
+    --kbd-border: rgba(255, 255, 255, 0.15);
+    --kbd-color: var(--txt);
 }
 *{
     margin:0;
@@ -218,11 +228,14 @@ iframe.preview{
 }
 .kbd{
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: #140e24;
-    border:1px solid rgba(255, 255, 255, 0.15);
+    background: linear-gradient(180deg, var(--kbd-bg), var(--kbd-bg-2, var(--kbd-bg)));
+    color: var(--kbd-color);
+    border:1px solid var(--kbd-border);
     padding: 2px 6px;
-    border-radius: 8px;
-
+    border-radius: 10px;
+    line-height: 1.2;
+    font-weight: 600;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
 }
 .label{
     font-size: 13px;
